@@ -1,0 +1,40 @@
+<h1 id="edit_h">プロフィールの編集</h1>
+<div class="panel panel-default">
+    <!--
+    <div class="panel-heading">
+        メッセージ入力
+    </div>
+    -->
+    
+    <%= form_for @user do |f| %>
+        <% if @user.errors.present? %>
+            <div class="alert alert-danger">
+                <%= alert %>
+                <ul>
+                    <% @user.errors.full_messages.each do | full_message | %>
+                    <li>
+                        <%= full_message %>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class:'form-control' %>
+        
+        <%= f.label :email %>
+        <%= f.text_field :email, class:'form-control' %>
+
+        <%= f.label :introduce %>
+        <%= f.text_area :introduce, class:'form-control' %>
+        
+        <%= f.label :place %>
+        <%= f.text_field :place, class:'form-control' %>
+
+        <%= f.label :birthday %>
+        <%= f.date_field :birthday, class:'form-control' %>
+
+      <%= f.submit class: "btn btn-sm btn-primary" %>
+    <% end %>
+</div>

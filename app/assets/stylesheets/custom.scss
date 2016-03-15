@@ -102,3 +102,10 @@ input {
         color: $state-danger-text;
     }
 }
+
+#edit_h{
+    border-left: 10px solid #337ab7;
+    border-bottom: 1px dashed #337ab7; /* 下ボーダーを、1px幅の破線、線色#CC3366に */
+    font-size: 20px;
+    text-align:left;
+}
