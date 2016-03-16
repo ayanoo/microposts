@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:edit, :update, :destroy]
+before_action :set_user, only: [:show, :edit, :update, :destroy]
 include SessionsHelper
 
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
   end
   
   def new
@@ -23,7 +23,8 @@ include SessionsHelper
   def edit
     @session_id = session[:user_id]
     #ログインユーザ本人の情報しか編集不可
-    if params[:id] != @session_id.to_s
+    # if params[:id] != @session_id.to_s
+    if current_user != @user
       flash[:danger] = "Please log in as a correct user."
       redirect_to login_url
     end
@@ -32,8 +33,8 @@ include SessionsHelper
   def update
     @session_id = session[:user_id]
     #ログインユーザ本人の情報しか編集不可
-    if params[:id]==@session_id.to_s
-
+    #if params[:id]==@session_id.to_s
+    if current_user == @user
       if @user.update(user_params)
         #　保存に成功した場合はトップページへリダイレクト
         flash[:success] = "プロフィールを編集しました。"
@@ -47,11 +48,8 @@ include SessionsHelper
     else 
       flash[:danger] = "Please log in as a correct user."
       redirect_to login_url
-    
     end
   end
- 
-  
   
   private
   
@@ -60,6 +58,11 @@ include SessionsHelper
   end
 
   def set_user
-    @user = User.find(params[:id])
+    SessionsHelper
+    #@user = User.find(params[:id])
+    
+    @user = User.find_by_id(params[:id]) if params[:id]
+    render(:nothing => true, :status => '404 Not Found') unless @user
+
   end
 end
