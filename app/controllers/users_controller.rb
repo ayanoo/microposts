@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:show, :edit, :update, :destroy]
-include SessionsHelper
-
+before_action :set_user, only: [:show, :destroy]
+before_action :correct_user, only: [:edit, :update]
   def show
-    #@user = User.find(params[:id])
   end
   
   def new
@@ -31,16 +29,14 @@ include SessionsHelper
   end
   
   def update
-    @session_id = session[:user_id]
     #ログインユーザ本人の情報しか編集不可
-    #if params[:id]==@session_id.to_s
     if current_user == @user
+
       if @user.update(user_params)
-        #　保存に成功した場合はトップページへリダイレクト
+        #　保存に成功した場合はプロフィール画面へ
         flash[:success] = "プロフィールを編集しました。"
-        redirect_to root_path
+        redirect_to user_url
       else 
-        #@users = User.all
         # 保存に失敗した場合は編集画面へ戻す
         flash.now[:alert] = "プロフィールの保存に失敗しました。"
         render 'edit'
@@ -64,4 +60,10 @@ include SessionsHelper
     render(:nothing => true, :status => '404 Not Found') unless @user
 
   end
+  
+  def correct_user
+    @user= User.find(params[:id])
+    redirect_to root_url if @user != current_user
+  end
+  
 end
