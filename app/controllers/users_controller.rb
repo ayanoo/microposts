@@ -58,7 +58,6 @@ include SessionsHelper
   end
 
   def set_user
-    SessionsHelper
     #@user = User.find(params[:id])
     
     @user = User.find_by_id(params[:id]) if params[:id]
