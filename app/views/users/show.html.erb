@@ -17,3 +17,44 @@
     <% end %>
   </div>
 </div>
+
+<h1 id="edit_h">プロフィール</h1>
+<div class="panel panel-default">
+    <div id="table">
+        <div>
+            <div>
+                <label for="user_name">Name</label>
+            </div>
+            <div id="show_content">
+                <%= @user.name %>
+            </div>
+    
+            <div>
+                <label for="email">Email</label>
+            </div>
+            <div id="show_content">
+                <%= @user.email %>
+            </div>
+    
+            <div>
+                <label for="introduce">Introduce</label>
+            </div>
+            <div id="show_content">
+                <%= @user.introduce %>
+            </div>
+
+            <div>
+                <label for="place">Place</label>
+            </div>
+            <div id="show_content">
+                <%= @user.place %>
+            </div>
+
+            <div>
+                <label for="birthday">Birthday</label>
+            </div>
+            <div id="show_content">
+                <%= @user.birthday %>
+            </div>
+    </div>
+</div>
