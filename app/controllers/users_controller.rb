@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 before_action :set_user, only: [:show, :destroy]
 before_action :correct_user, only: [:edit, :update]
+
   def show
   end
   
@@ -19,19 +20,9 @@ before_action :correct_user, only: [:edit, :update]
   end
   
   def edit
-    @session_id = session[:user_id]
-    #ログインユーザ本人の情報しか編集不可
-    # if params[:id] != @session_id.to_s
-    if current_user != @user
-      flash[:danger] = "Please log in as a correct user."
-      redirect_to login_url
-    end
   end
   
   def update
-    #ログインユーザ本人の情報しか編集不可
-    if current_user == @user
-
       if @user.update(user_params)
         #　保存に成功した場合はプロフィール画面へ
         flash[:success] = "プロフィールを編集しました。"
@@ -41,10 +32,6 @@ before_action :correct_user, only: [:edit, :update]
         flash.now[:alert] = "プロフィールの保存に失敗しました。"
         render 'edit'
       end
-    else 
-      flash[:danger] = "Please log in as a correct user."
-      redirect_to login_url
-    end
   end
   
   private
@@ -54,14 +41,11 @@ before_action :correct_user, only: [:edit, :update]
   end
 
   def set_user
-    #@user = User.find(params[:id])
-    
-    @user = User.find_by_id(params[:id]) if params[:id]
-    render(:nothing => true, :status => '404 Not Found') unless @user
-
+    @user = User.find(params[:id])
   end
   
   def correct_user
+    # 本人以外のデータ編集は不可。params[:id] が違う場合はトップページへ
     @user= User.find(params[:id])
     redirect_to root_url if @user != current_user
   end
