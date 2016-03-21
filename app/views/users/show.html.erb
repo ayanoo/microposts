@@ -6,14 +6,14 @@
         <%= @user.name %>
       </h1>
     </section>
-    <ul style="list-style:none;">
-      <li style="font-size: 2em;">
-        <%=link_to 'フォローリスト', followings_user_path(current_user.id) %>
-      </li>
-      <li>
-        <%=link_to 'フォロワーリスト', followers_user_path(current_user.id) %>
-      </li>
-    </ul>
+        <ul style="list-style:none;">
+            <li>
+                <%= link_to 'フォローリスト', followings_user_path(@user.id) %>
+            </li>
+            <li>
+                <%= link_to "フォロワーリスト", followers_user_path(@user.id)  %>
+            </li>
+        </ul>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
@@ -24,4 +24,45 @@
       </ol>
     <% end %>
   </div>
+</div>
+
+<h1 id="edit_h">プロフィール</h1>
+<div class="panel panel-default">
+    <div id="table">
+        <div>
+            <div>
+                <label for="user_name">Name</label>
+            </div>
+            <div id="show_content">
+                <%= @user.name %>
+            </div>
+    
+            <div>
+                <label for="email">Email</label>
+            </div>
+            <div id="show_content">
+                <%= @user.email %>
+            </div>
+    
+            <div>
+                <label for="introduce">Introduce</label>
+            </div>
+            <div id="show_content">
+                <%= @user.introduce %>
+            </div>
+
+            <div>
+                <label for="place">Place</label>
+            </div>
+            <div id="show_content">
+                <%= @user.place %>
+            </div>
+
+            <div>
+                <label for="birthday">Birthday</label>
+            </div>
+            <div id="show_content">
+                <%= @user.birthday %>
+            </div>
+    </div>
 </div>
