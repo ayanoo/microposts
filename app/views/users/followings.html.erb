@@ -1,0 +1,30 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <h1 id="follow_h">フォローリスト</h1>
+  <div class="col-md-8">
+    <% if @users.any? %>
+      <div class="user_avatars">
+        <% @users.each do |f| %>
+          <div>
+            <%= link_to gravatar_for(f, size: 30), f %>
+          </div>
+          <ul style="list-style:none;">
+            <li style="font-size: 2em;">
+              <%= f.name %>
+            </li>
+            <li>
+              <%= f.email %>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
