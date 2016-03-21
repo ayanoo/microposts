@@ -36,17 +36,6 @@ before_action :correct_user, only: [:edit, :update]
       end
   end
   
-  # フォローしているユーザーを表示
-  def followings
-    @users = @user.following_users
-  end
-  
-  # フォローされているユーザーを表示
-  def followers
-    @users = @user.follower_users
-  end
-  
-  
   private
   
   def user_params

@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   #get "/users/followings/:id" => "users#followings", :as => :followings
   #get   'followers', to:'users#followers'
   
-  resources :users do
-    member do
-      get :followings, :followers
-    end
-  end
+  resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts
   resources :relationships, only: [:create, :destroy]
