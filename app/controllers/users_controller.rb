@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:show, :destroy]
+before_action :set_user, only: [:show, :edit, :update, :destroy, :followings, :followers]
 before_action :correct_user, only: [:edit, :update]
 
   def show
@@ -36,6 +36,17 @@ before_action :correct_user, only: [:edit, :update]
       end
   end
   
+  # フォローしているユーザーを表示
+  def followings
+    @users = @user.following_users
+  end
+  
+  # フォローされているユーザーを表示
+  def followers
+    @users = @user.follower_users
+  end
+  
+  
   private
   
   def user_params
@@ -47,8 +58,9 @@ before_action :correct_user, only: [:edit, :update]
   end
   
   def correct_user
-    # 本人以外のデータ編集は不可。params[:id] が違う場合はトップページへ
-    @user= User.find(params[:id])
+    # 本人以外のデータ編集は不可。params[:id] の入ってる@userとsession[:id]の
+    # 入ってるcurrent_userの中身が違う場合はトップページへ
+    # @userのセットはset_userにて。
     redirect_to root_url if @user != current_user
   end
   
