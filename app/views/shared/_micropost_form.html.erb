@@ -1,7 +1,15 @@
 <%= form_for(@micropost) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="field">
+        <% 
+        # リツイート用のオリジナルメッセージがある場合にはセット
+        if @original_text 
+            @micropost.content = @original_text
+        end
+        %>
         <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+        <%= f.label :image %>
+　　    <%= f.file_field :image %>
     </div>
     <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

@@ -31,6 +31,18 @@ gem 'bcrypt', '~> 3.1.7'
 # 日付チェック
 gem 'validates_timeliness', '~> 4.0'
 
+# ページネーション
+gem 'kaminari'
+
+gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
+gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
+gem 'twitter-bootstrap-rails' # Bootstrapの本体
+
+
+# 画像アップロード
+gem 'carrierwave'
+gem "mini_magick"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

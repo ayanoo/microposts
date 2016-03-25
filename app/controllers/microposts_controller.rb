@@ -8,7 +8,6 @@ class MicropostsController < ApplicationController
             flash[:success] = "Micropost created!"
             redirect_to root_url
         else
-            @feed_ite4ms = current_user.feed_items.includes(:user).order(created_at: :desc)
             render 'static_pages/home'
         end
     end
@@ -21,9 +20,27 @@ class MicropostsController < ApplicationController
         redirect_to request.referrer || root_url
     end
     
+    def retweet
+        @user = User.find(current_user.id)
+        
+        #オリジナルメッセージの取得
+        @micropost = Micropost.find(params[:original_id])
+        
+        byebug
+        # 引用する内容を作成
+        @original_text = 'RT @'
+        @original_text << @micropost.user.name << ': '
+        @original_text << @micropost.content
+        @original_text << @micropost.image
+        
+        # micopostを初期化、original_idだけセット
+        @micropost = current_user.microposts.build
+        @micropost.original_id = params[:original_id]
+    end
+    
     private
     def micropost_params
-        params.require(:micropost).permit(:content)
+        params.require(:micropost).permit(:content, :image)
     end
     
 end
