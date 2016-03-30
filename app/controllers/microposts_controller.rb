@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-    before_action :logged_in_user, only: [:create]
+    before_action :logged_in_user, only: [:create, :retweet]
     
     def create
         @micropost = current_user.microposts.build(micropost_params)
@@ -26,18 +26,18 @@ class MicropostsController < ApplicationController
         #オリジナルメッセージの取得
         @micropost = Micropost.find(params[:original_id])
         
-        byebug
         # 引用する内容を作成
         @original_text = 'RT @'
         @original_text << @micropost.user.name << ': '
         @original_text << @micropost.content
-        @original_text << @micropost.image
+        #画像引用がうまくいかない...
+        #@original_text << @micropost.image.file.file
         
         # micopostを初期化、original_idだけセット
         @micropost = current_user.microposts.build
         @micropost.original_id = params[:original_id]
     end
-    
+
     private
     def micropost_params
         params.require(:micropost).permit(:content, :image)
