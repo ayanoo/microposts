@@ -3,8 +3,8 @@ class Micropost < ActiveRecord::Base
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   
-  attr_accessor  :image  
-  mount_uploader :image, ImageUploader  
+  #attr_accessor  :image  
+  #mount_uploader :image, ImageUploader  
   mount_uploader :avatar, AvatarUploader
 
 
