@@ -37,14 +37,17 @@ gem 'validates_timeliness', '~> 4.0'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
-gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
-gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
-gem 'twitter-bootstrap-rails' # Bootstrapの本体
+#gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
+#gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
+#gem 'twitter-bootstrap-rails' # Bootstrapの本体
 
 
 # 画像アップロード
 gem 'carrierwave'
 gem "mini_magick"
+
+#Heroku 画像アップロード
+gem 'cloudinary'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

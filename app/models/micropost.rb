@@ -5,6 +5,7 @@ class Micropost < ActiveRecord::Base
   
   attr_accessor  :image  
   mount_uploader :image, ImageUploader  
+  mount_uploader :avatar, AvatarUploader
 
 
     # お気に入りをつける
