@@ -30,6 +30,9 @@
 <div class="panel panel-default">
     <div id="table">
         <div>
+            <div id="show_content">
+                <label for="avatar"><%= image_tag @user.avatar.url if @user.avatar %></label>
+            </div>
             <div>
                 <label for="user_name">Name</label>
             </div>
