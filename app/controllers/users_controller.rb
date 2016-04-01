@@ -50,7 +50,7 @@ before_action :correct_user, only: [:edit, :update]
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduce, :place, :birthday)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduce, :place, :birthday, :avatar)
   end
 
   def set_user
