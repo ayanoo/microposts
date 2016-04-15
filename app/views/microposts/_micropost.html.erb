@@ -16,7 +16,7 @@
             <%= link_to "re-tweet", retweet_path(micropost.id ) %>
         <% end %>
     </span>
-    <span id="like_span like_form<%= micropost.id %>">
+    <span id="like_form<%= micropost.id %>">
         <% if current_user.favorite?(micropost) %>
             <%= render(partial: 'microposts/unlike', locals: { micropost: micropost }) %>
         <% else %>
