@@ -14,7 +14,18 @@
                                              data: { confirm: "You sure?"} %>
         <% else %>
             <%= link_to "re-tweet", retweet_path(micropost.id ) %>
-        
         <% end %>
+    </span>
+    <span id="like_span like_form<%= micropost.id %>">
+        <% if current_user.favorite?(micropost) %>
+            <%= render(partial: 'microposts/unlike', locals: { micropost: micropost }) %>
+        <% else %>
+            <%= render(partial: 'microposts/like', locals: { micropost: micropost }) %>
+        <% end %>
+        <%= 
+        #link_to "like", likes_path(micropost_id: micropost.id  ), remote: true, method: :post 
+        #render 'microposts/like',micropost: micropost
+        #render(partial: 'microposts/like', locals: { micropost: micropost })
+        %>
     </span>
 </li>

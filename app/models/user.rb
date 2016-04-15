@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
 
     has_many :follower_users, through: :follower_relationships, source: :follower
     
+    has_many :likes, dependent: :destroy
+    has_many :like_microposts, through: :likes, source: :micropost
 
     # 他のユーザーをフォローする
     def follow(other_user)
@@ -55,4 +57,20 @@ class User < ActiveRecord::Base
         Micropost.where(user_id: following_user_ids + [self.id])
     end
 
+    # お気に入りをつける
+    def press_like(microposts)
+        likes.find_or_create_by(micropost_id: microposts.id)
+    end
+    
+    # お気に入りを解除する
+    def press_unlike(microposts)
+        user_like = likes.find_by(micropost_id: microposts.id)
+        likes.destroy if user_like
+    end
+    
+    def favorite?(micopost)
+        like_microposts.include?(micopost)
+    end
+    
+        
 end
