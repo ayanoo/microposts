@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     # お気に入りを解除する
     def press_unlike(microposts)
         user_like = likes.find_by(micropost_id: microposts.id)
-        likes.destroy if user_like
+        user_like.destroy if user_like
     end
     
     def favorite?(micopost)
