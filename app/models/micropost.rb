@@ -6,8 +6,8 @@ class Micropost < ActiveRecord::Base
   attr_accessor  :image  
   mount_uploader :image, ImageUploader  
 
-    has_many :microposts, dependent: :destroy
-    has_many :liked_microposts, through: :microposts, source: :user
+    has_many :likes, dependent: :destroy
+    has_many :liked_users, through: :likes, source: :user
 
 
 end

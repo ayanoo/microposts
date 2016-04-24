@@ -1,0 +1,58 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <ul style="list-style:none;">
+        <li>
+            <%= link_to 'フォローリスト', followings_user_path(@user.id) %>
+        </li>
+        <li>
+            <%= link_to 'フォロワーリスト', followers_user_path(@user.id) %>
+        </li>
+        <li>
+            <%= link_to "プロフィール", current_user %>
+        </li>
+    </ul>
+  </aside>
+  <h1 id="follow_h">いいね！一覧</h1>
+  <div class="col-md-8">
+    <ol class="microposts">
+          
+    <% if @like_list.any? %>
+        <% @like_list.each do |f| %>
+    
+            <li id="micropost-<%= f.id %>">
+                <%= link_to gravatar_for(f.user, size: 50), f.user %>
+                <span class="user"><%= link_to f.user.name, f.user %></span>
+                <span class="content"><%= f.content %></span>
+                <span class="content">
+                <% if f.image? %>
+　　                <%= image_tag f.image.to_s %>
+　              <% end %>
+                </span>
+                <span class="timestamp">
+                    Posted <%= time_ago_in_words(f.created_at) %> ago.
+                    <% if current_user == f.user %>
+                        <%= link_to "delete", f, method: :delete, 
+                                             data: { confirm: "You sure?"} %>
+                    <% else %>
+                        <%= link_to "re-tweet", retweet_path(f.id ) %>
+                    <% end %>
+                    <span id="like_form<%= f.id %>">
+                    <% if current_user.favorite?(f) %>
+                        <%= render(partial: 'microposts/unlike', locals: { micropost: f }) %>
+                    <% else %>
+                        <%= render(partial: 'microposts/like', locals: { micropost: f }) %>
+                    <% end %>
+                    </span>
+                </span>
+            </li>
+        <% end %>
+    <% end %>
+    </ol>
+    </div>
+

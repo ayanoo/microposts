@@ -11,7 +11,7 @@ class LikesController < ApplicationController
     #end
 
     def create
-        @micropost = Micropost.find(params[:micropost_id])
+        @micropost = Micropost.find(params[:id])
         #いいねをつける
         current_user.press_like(@micropost)
 

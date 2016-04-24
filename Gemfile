@@ -35,7 +35,7 @@ gem 'validates_timeliness', '~> 4.0'
 
 # ページネーション
 gem 'kaminari'
-gem 'kaminari-bootstrap', '~> 3.0.1'
+#gem 'kaminari-bootstrap', '~> 3.0.1'
 
 #gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
 #gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため

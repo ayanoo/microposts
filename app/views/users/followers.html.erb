@@ -6,6 +6,14 @@
         <%= @user.name %>
       </h1>
     </section>
+    <ul style="list-style:none;">
+        <li>
+            <%= link_to 'フォローリスト', followings_user_path(@user.id) %>
+        </li>
+        <li>
+            <%= link_to "プロフィール", current_user %>
+        </li>
+    </ul>
   </aside>
   <h1 id="follow_h">フォロワーリスト</h1>
   <div class="col-md-8">

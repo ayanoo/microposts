@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:show, :edit, :update, :destroy, :followings, :followers]
+before_action :set_user, only: [:show, :edit, :update, :destroy, :followings, :followers, :likelist]
 before_action :correct_user, only: [:edit, :update]
 
   def show
@@ -45,6 +45,12 @@ before_action :correct_user, only: [:edit, :update]
   def followers
     @users = @user.follower_users
   end
+
+  def likelist
+    @like_list = @user.like_microposts
+  end
+    
+
 
   
   private

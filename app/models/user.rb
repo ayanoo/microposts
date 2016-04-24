@@ -72,5 +72,4 @@ class User < ActiveRecord::Base
         like_microposts.include?(micopost)
     end
     
-        
 end
